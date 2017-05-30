@@ -46,8 +46,10 @@
         $scope.feedBack = "";
         $scope.a = Math.floor((Math.random() * 10) + 1);
         $scope.b = Math.floor((Math.random() * 10) + 1);
-        $scope.correctAns = $scope.a + $scope.b;
-        $scope.targil = $scope.a + " + " + $scope.b;
+
+        $scope.correctAns = $scope.a * $scope.b;
+        $scope.targil = $scope.a + " * " + $scope.b;
+
         $scope.ansArr = [];
 
         $scope.ansArr.push($scope.correctAns);
@@ -119,8 +121,10 @@
             $scope.feedBack = "";
             $scope.a = Math.floor((Math.random() * 10) + 1);
             $scope.b = Math.floor((Math.random() * 10) + 1);
-            $scope.correctAns = $scope.a + $scope.b;
-            $scope.targil = $scope.a + " + " + $scope.b;
+            $scope.correctAns = $scope.a * $scope.b;
+            $scope.targil = $scope.a + " * " + $scope.b;
+
+
             $scope.ansArr = [];
 
             $scope.ansArr.push($scope.correctAns);
