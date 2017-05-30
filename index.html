@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <style>
+        #app {
+            padding-left: 1%;
+        }
+        
+        img {
+            width: 5%;
+        }
+        
+        #main {
+            width: 300%;
+        }
+    </style>
+</head>
+
+<div id="app" ng-app="millioneer" ng-controller="myCtrl">
+
+
+
+
+
+    <input type="text" ng-model="targil">
+    <h1 ng-model="targil"></h1>
+    <h1>{{targil}}</h1>
+    <p ng-click="checkAns('ans1')">{{ansArr[0]}}</p>
+    <p ng-click="checkAns('ans2')">{{ansArr[1]}}</p>
+    <p ng-click="checkAns('ans3')">{{ansArr[2]}}</p>
+    <p ng-click="checkAns('ans4')">{{ansArr[3]}}</p>
+    <p ng-style="{'background-color':getColor()}">{{correctAns}}</p>
+    <br>
+
+
+
+</div>
+
+
+</div>
+
+<script>
+    var app = angular.module('millioneer', []);
+    app.controller('myCtrl', function ($scope, $timeout, $interval) {
+
+        $scope.targil = "lee";
+
+        $scope.a = Math.floor((Math.random() * 10) + 1);
+        $scope.b = Math.floor((Math.random() * 10) + 1);
+        $scope.correctAns = $scope.a + $scope.b;
+        $scope.targil = $scope.a + " + " + $scope.b;
+
+
+        $scope.ansArr.push($scope.correctAns);
+        var ansRand;
+        for (var i = 0; i < 3; i++) {
+            var lim = Math.floor((Math.random() * 5) + 1);
+            var actionRand = Math.floor((Math.random() * 2) + 1);
+            if (actionRand == 1) {
+                ansRand = $scope.correctAns + lim;
+
+            } else {
+                ansRand = $scope.correctAns + lim;
+            }
+            $scope.ansArr.push(ansRand);
+        }
+        $scope.ansArr.sort();
+
+
+
+
+
+
+
+
+
+
+        $scope.checkAns = function (ans) {
+
+
+
+            if (ans == $scope.questions[x]["correct"]) {
+                $scope.answer = "CORRECT";
+                // $scope.createQuestion();
+                $scope.stopTimer = true;
+                $timeout(function () {
+                    $scope.resetTimer();
+                    $scope.stopTimer = false;
+
+                }, 2000);
+
+            }
+            else {
+                $scope.answer = "WRONG";
+            }
+        }
+
+
+
+
+        $scope.ansArr = [];
+
+
+        $scope.createQuestion = function () {
+
+            $scope.a = Math.floor((Math.random() * 10) + 1);
+            $scope.b = Math.floor((Math.random() * 10) + 1);
+            $scope.correctAns = $scope.a + $scope.b;
+            $scope.targil = $scope.a + " + " + $scope.b;
+
+
+            ansArr.push($scope.correctAns);
+            var ansRand;
+            for (var i = 0; i < 3; i++) {
+                var lim = Math.floor((Math.random() * 5) + 1);
+                var actionRand = Math.floor((Math.random() * 2) + 1);
+                if (actionRand == 1) {
+                    ansRand = $scope.correctAns + lim;
+
+                } else {
+                    ansRand = $scope.correctAns + lim;
+                }
+                ansArr.push(ansRand);
+            }
+            ansArr.sort();
+            $scope.questions[0]["q"] = $scope.targil;
+            $scope.questions[0]["ans1"] = ansArr[0];
+            $scope.questions[0]["ans2"] = ansArr[1];
+            $scope.questions[0]["ans3"] = ansArr[2];
+            $scope.questions[0]["ans4"] = ansArr[3];
+            $scope.questions[0]["correct"] = $scope.correctAns;
+
+        }
+
+
+        $scope.getColor = function () {
+            if ($scope.answer == "CORRECT") { return "green"; }
+            if ($scope.answer == "WRONG" || $scope.answer == "TIME OUT") { return "red"; }
+
+        }
+
+    });
+
+</script>
+
+
+</html>
+
+<!--the index is to remove items according to indexes-->
