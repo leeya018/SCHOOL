@@ -19,36 +19,51 @@
     </style>
 </head>
 
-<div id="app" ng-app="millioneer" ng-controller="myCtrl">
+<div id="app" ng-app="millioneer" ng-controller="myCtrlKefel">
 
 
 
+    <div ng-show="level == 0">
+        <button type="button" ng-click="setLevel(1)">רמה 1</button><br>
+        <button type="button" ng-click="setLevel(2)">רמה 2</button><br>
+        <button type="button" ng-click="setLevel(3)">רמה 3</button><br>
+        <button type="button" ng-click="setLevel(4)">רמה 4</button><br>
+    </div>
 
-
-    <h1>{{targil}}</h1>
-    <p ng-click="checkAns('ans1')">{{ansArr[0]}}</p>
-    <p ng-click="checkAns('ans2')">{{ansArr[1]}}</p>
-    <p ng-click="checkAns('ans3')">{{ansArr[2]}}</p>
-    <p ng-click="checkAns('ans4')">{{ansArr[3]}}</p>
-    <p ng-style="{'background-color':getColor()}">{{feedBack}}</p>
-
-
-</div>
+    <div ng-show="level !== 0">
+        <h1>{{targil}}</h1>
+        <p ng-click="checkAns('ans1')">{{ansArr[0]}}</p>
+        <p ng-click="checkAns('ans2')">{{ansArr[1]}}</p>
+        <p ng-click="checkAns('ans3')">{{ansArr[2]}}</p>
+        <p ng-click="checkAns('ans4')">{{ansArr[3]}}</p>
+        <p ng-style="{'background-color':getColor()}">{{feedBack}}</p>
+    </div>
 
 
 </div>
 
 <script>
     var app = angular.module('millioneer', []);
-    app.controller('myCtrl', function ($scope, $timeout) {
+    app.controller('myCtrlKefel', function ($scope, $timeout) {
+
+        $scope.setLevel = function (level) {
+            $scope.level = level;
+            $scope.limitNumA_B = level * 5;
+        }
+
+        $scope.level = 0;
+        $scope.limitNumA_B = 0;
+
+
+
 
         $scope.correct = "";
         $scope.feedBack = "";
-        $scope.a = Math.floor((Math.random() * 10) + 1);
-        $scope.b = Math.floor((Math.random() * 10) + 1);
+        $scope.a = Math.floor((Math.random() * $scope.limitNumA_B) + 1);
+        $scope.b = Math.floor((Math.random() * $scope.limitNumA_B) + 1);
 
         $scope.correctAns = $scope.a * $scope.b;
-        $scope.targil = $scope.a + " * " + $scope.b;
+        $scope.targil = $scope.a + " * " + $scope.b + " =";
 
         $scope.ansArr = [];
 
@@ -119,10 +134,10 @@
         $scope.createQuestion = function () {
             $scope.correct = "";
             $scope.feedBack = "";
-            $scope.a = Math.floor((Math.random() * 10) + 1);
-            $scope.b = Math.floor((Math.random() * 10) + 1);
+            $scope.a = Math.floor((Math.random() * $scope.limitNumA_B) + 1);
+            $scope.b = Math.floor((Math.random() * $scope.limitNumA_B) + 1);
             $scope.correctAns = $scope.a * $scope.b;
-            $scope.targil = $scope.a + " * " + $scope.b;
+            $scope.targil = $scope.a + " * " + $scope.b + " =";
 
 
             $scope.ansArr = [];
