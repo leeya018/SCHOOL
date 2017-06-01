@@ -17,30 +17,40 @@
             width: 300%;
         }
     </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
+<body>
+<div id="app" ng-app="millioneer" ng-controller="myCtrl" >
 
-<div id="app" ng-app="millioneer" ng-controller="myCtrl">
-
-    <div ng-show="level == 0">
-        <button type="button" ng-click="setLevel(1)">רמה 1</button><br>
-        <button type="button" ng-click="setLevel(2)">רמה 2</button><br>
-        <button type="button" ng-click="setLevel(3)">רמה 3</button><br>
-        <button type="button" ng-click="setLevel(4)">רמה 4</button><br>
-        <button type="button" ng-click="setLevel(5)">רמה 5</button><br>
+    <div ng-show="level == 0" class="btn pull-right" class="container">
+        <h2>בחר את הרמה שלך</h2>
+        <button type="button" ng-click="setLevel(1)" class="btn btn-info">רמה 1</button><br>
+        <button type="button" ng-click="setLevel(2)" class="btn btn-info">רמה 2</button><br>
+        <button type="button" ng-click="setLevel(3)" class="btn btn-info">רמה 3</button><br>
+        <button type="button" ng-click="setLevel(4)" class="btn btn-info">רמה 4</button><br>
+        <button type="button" ng-click="setLevel(5)" class="btn btn-info">רמה 5</button><br>
     </div>
 
 
 
 
-    <div ng-show="level !== 0">
-        <h1>{{targil}}</h1>
+    <div ng-show="level !== 0" class="container">
+        <h1 class="active"> {{targil}}</h1>
         <p ng-click="checkAns('ans1')">{{ansArr[0]}}</p>
         <p ng-click="checkAns('ans2')">{{ansArr[1]}}</p>
         <p ng-click="checkAns('ans3')">{{ansArr[2]}}</p>
         <p ng-click="checkAns('ans4')">{{ansArr[3]}}</p>
         <p ng-style="{'background-color':getColor()}">{{feedBack}}</p>
+        
+    <button ng-show="level !== 0" ng-click="clearLevel()" class="btn btn-info pull-right" >change level</button>
     </div>
 
+    
+    <a href="index.html" ng-show="level == 0"><h1>back</h1></a>
 
 </div>
 
@@ -51,13 +61,17 @@
     var app = angular.module('millioneer', []);
     app.controller('myCtrl', function ($scope, $timeout) {
 
-        
+
         $scope.setLevel = function (level) {
             $scope.level = level;
             $scope.limitNumA_B = level * 5;
         }
 
-        $scope.level=0;
+        $scope.clearLevel = function(){
+            $scope.level = 0;
+        }
+
+        $scope.level = 0;
         $scope.limitNumA_B = 0;
 
 
@@ -89,7 +103,7 @@
                 ansRand = $scope.correctAns + lim;
 
             } else {
-                ansRand = $scope.correctAns + lim;
+                ansRand = $scope.correctAns - lim;
             }
             if ($scope.ansArr.indexOf(ansRand) !== -1) {
                 i--;
@@ -169,7 +183,7 @@
                     ansRand = $scope.correctAns + lim;
 
                 } else {
-                    ansRand = $scope.correctAns + lim;
+                    ansRand = $scope.correctAns - lim;
                 }
                 if ($scope.ansArr.indexOf(ansRand) !== -1) {
                     i--;
@@ -199,4 +213,5 @@
 </script>
 
 
+</body>
 </html>
